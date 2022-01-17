@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var playerScore:Int = 0
+    @State var computerScore:Int = 0
+    @State var playerCard:Int = Int.random(in: 2...14)
+    @State var computerCard:Int = Int.random(in: 2...14)
     var body: some View {
         GeometryReader { geo in
             ZStack{
@@ -21,14 +25,19 @@ struct ContentView: View {
                     Spacer()
                     HStack{
                         Spacer()
-                        Image("card2")
+                        Image("card\(playerCard)")
                         Spacer()
-                        Image("card3")
+                        Image("card\(computerCard)")
                         Spacer()
                     }
                     Spacer()
                     Button {
-                        
+                        if (playerCard > computerCard){
+                            playerScore += 1
+                        }
+                        else {
+                            computerScore += 1
+                        }
                     } label: {
                         Image("dealbutton")
                             .resizable()
@@ -42,14 +51,14 @@ struct ContentView: View {
                                 .foregroundColor(.white)
                                 .font(.system(size: 20, weight: .semibold, design: .rounded))
                                 .padding(1)
-                            Text("0")
+                            Text("\(playerScore)")
                                 .foregroundColor(.white)
                                 .font(.system(size: 20, weight: .semibold, design: .rounded))
                                 .padding(1)
                         }
                         Spacer()
                         VStack{
-                            Text("Computer")
+                            Text("\(computerScore)")
                                 .foregroundColor(.white)
                                 .font(.system(size: 20, weight: .semibold, design: .rounded))
                                 .padding(1)
