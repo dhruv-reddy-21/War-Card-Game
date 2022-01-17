@@ -31,20 +31,21 @@ struct ContentView: View {
                         Spacer()
                     }
                     Spacer()
-                    Button {
+                    Button(action: {
                         if (playerCard > computerCard){
                             playerScore += 1
                         }
-                        else {
+                        if (playerCard < computerCard){
                             computerScore += 1
                         }
-                        playerCard = Int.random(in: 2...14)
-                        computerCard = Int.random(in: 2...14)
-                    } label: {
+                        playerScore = Int.random(in: 2...14)
+                        computerScore = Int.random(in: 2...14)
+                    }, label: {
                         Image("dealbutton")
                             .resizable()
                             .frame(width: geo.size.width / 2, height: geo.size.height / 10, alignment: .center)
-                    }
+                    })
+
                     Spacer()
                     HStack{
                         Spacer()
