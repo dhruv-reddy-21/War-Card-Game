@@ -32,9 +32,7 @@ struct ContentView: View {
                     }
                     Spacer()
                     Button(action: {
-                        playerCard = Int.random(in: 2...14)
-                        computerCard = Int.random(in: 2...14)
-                        if (playerCard > computerCard){
+                                                if (playerCard > computerCard){
                             playerScore += 1
                         }
                         if (playerCard < computerCard){
@@ -44,6 +42,9 @@ struct ContentView: View {
                             computerScore += 1
                             playerScore += 1
                         }
+                        playerCard = Int.random(in: 2...14)
+                        computerCard = Int.random(in: 2...14)
+
 
                     }, label: {
                         Image("dealbutton")
