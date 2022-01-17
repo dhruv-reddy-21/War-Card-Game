@@ -38,6 +38,8 @@ struct ContentView: View {
                         else {
                             computerScore += 1
                         }
+                        playerCard = Int.random(in: 2...14)
+                        computerCard = Int.random(in: 2...14)
                     } label: {
                         Image("dealbutton")
                             .resizable()
@@ -58,11 +60,11 @@ struct ContentView: View {
                         }
                         Spacer()
                         VStack{
-                            Text("\(computerScore)")
+                            Text("Computer")
                                 .foregroundColor(.white)
                                 .font(.system(size: 20, weight: .semibold, design: .rounded))
                                 .padding(1)
-                            Text("0")
+                            Text("\(computerScore)")
                                 .foregroundColor(.white)
                                 .font(.system(size: 20, weight: .semibold, design: .rounded))
                                 .padding(1)
