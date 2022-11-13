@@ -7,85 +7,71 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    @State var playerScore:Int = 0
-    @State var computerScore:Int = 0
-    @State var playerCard:Int = Int.random(in: 2...14)
-    @State var computerCard:Int = Int.random(in: 2...14)
+struct ContentView:View {
+    @State var playerScore = 0
+    @State var computerScore = 0
+    @State var playerCard = 2
+    @State var computerCard = 2
     var body: some View {
-        GeometryReader { geo in
-            ZStack{
-                Image("background")
-                    .resizable()
-                    .ignoresSafeArea()
-                VStack{
-                    Image("logo")
-                        .resizable()
-                        .frame(width: geo.size.width / 2, height: geo.size.height / 8, alignment: .center)
+        ZStack(){
+            Image("background")
+                .ignoresSafeArea()
+            VStack{
+                Spacer()
+                Image("logo")
+                    .padding()
+                Spacer()
+                HStack{
+                    Image("card\(playerCard)")
+                        .padding()
+                    Image("card\(computerCard)")
+                        .padding()
+                }.padding()
+                Spacer()
+                Button(action: {
+                    playerCard = Int.random(in: 2...14)
+                    computerCard = Int.random(in: 2...14)
+                    if playerCard > computerCard {
+                        playerScore += 1
+                    }
+                    if computerCard > playerCard {
+                        computerScore += 1
+                    }
+                    else {
+                        computerScore += 1
+                        playerScore += 1
+                    }
+                }, label: {Image("dealbutton")})
+                Spacer()
+                HStack{
                     Spacer()
-                    HStack{
-                        Spacer()
-                        Image("card\(playerCard)")
-                        Spacer()
-                        Image("card\(computerCard)")
-                        Spacer()
+                    VStack{
+                        Text("Player")
+                            .foregroundColor(.white)
+                            .font(.system(size: 20, weight: .semibold, design: .rounded))
+                        Text("\(playerScore)")
+                            .padding()
+                            .foregroundColor(.white)
+                            .font(.system(size: 20, weight: .semibold, design: .rounded))
                     }
                     Spacer()
-                    Button(action: {
-                        playerCard = Int.random(in: 2...14)
-                        computerCard = Int.random(in: 2...14)
-                        
-                        if (playerCard > computerCard){
-                            playerScore += 1
-                        }
-                        if (playerCard < computerCard){
-                            computerScore += 1
-                        }
-                        if (playerCard == computerCard){
-                            computerScore += 1
-                            playerScore += 1
-                        }
-                        
-
-
-                    }, label: {
-                        Image("dealbutton")
-                            .resizable()
-                            .frame(width: geo.size.width / 2, height: geo.size.height / 10, alignment: .center)
-                    })
-
-
-                    Spacer()
-                    HStack{
-                        Spacer()
-                        VStack{
-                            Text("Player")
-                                .foregroundColor(.white)
-                                .font(.system(size: 20, weight: .semibold, design: .rounded))
-                                .padding(1)
-                            Text("\(playerScore)")
-                                .foregroundColor(.white)
-                                .font(.system(size: 20, weight: .semibold, design: .rounded))
-                                .padding(1)
-                        }
-                        Spacer()
-                        VStack{
-                            Text("Computer")
-                                .foregroundColor(.white)
-                                .font(.system(size: 20, weight: .semibold, design: .rounded))
-                                .padding(1)
-                            Text("\(computerScore)")
-                                .foregroundColor(.white)
-                                .font(.system(size: 20, weight: .semibold, design: .rounded))
-                                .padding(1)
-                        }
-                        Spacer()
+                    VStack {
+                        Text("Computer")
+                            .foregroundColor(.white)
+                            .font(.system(size: 20, weight: .semibold, design: .rounded))
+                        Text("\(computerScore)")
+                            .padding()
+                            .foregroundColor(.white)
+                            .font(.system(size: 20, weight: .semibold, design: .rounded))
                     }
-
+                    Spacer()
                 }
+                Spacer()
             }
         }
     }
+    
+    
 }
 
 struct ContentView_Previews: PreviewProvider {
